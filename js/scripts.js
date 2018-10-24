@@ -32,22 +32,38 @@ function letterDelete(inputArray, deleteArrayFunc) {
   return returnArray;
 }
 
+function letterOppositeDelete(inputArray, deleteArrayFunc) {
+  var returnArray = [];
+  for (var i = 0; i <= (inputArray.length)-1; i++) {
+    if (deleteArrayFunc.includes(inputArray[i])) {
+    returnArray.push(inputArray[i])
+    }
+    else {returnArray.push("-")
+    }
+  }
+  return returnArray;
+}
+
 $(document).ready(function() {
   $("form#formSubmit").submit(function(event) {
     event.preventDefault();
     $("#inputStringHere").empty();
     $("#removeLetters").empty();
     $("#deletedStringHere").empty();
+    $("oppDeletedStringHere").empty();
     var inputString = $("#stringInput").val();
     var deleteString = $("#letterInput").val();
     var stringArray = splitString(inputString, "");
     var deleteArray = splitString(deleteString, "")
     var deletedLetters = letterDelete(stringArray, deleteArray);
+    var oppositeDeletedLetters = letterOppositeDelete(stringArray, deleteArray);
     $("#inputStringHere").append(stringArray);
     $("#removeLetters").append(deleteArray);
     $("#deletedStringHere").append(deletedLetters);
+    $("#oppDeletedStringHere").append(oppositeDeletedLetters);
     console.log(stringArray);
     console.log(deleteArray);
     console.log(deletedLetters);
+    console.log(oppositeDeletedLetters);
   });
 });
